@@ -187,7 +187,9 @@ img {
   gap: 20px;
 } */
 
-.header {
+
+/* grid */
+/* .header {
   grid-area: header;
   background-color: aqua;
 }
@@ -247,4 +249,8 @@ main {
       "   feature2  "
       "   feature1  ";
   }
-}
+} */
+/* 
+.shadow img {
+  filter: drop-shadow(100px 20px #333);
+} */
