@@ -1,8 +1,81 @@
+/* 123 */
+/* * {
+  margin: 0;
+  padding: 0;
+}
+body {
+  overflow: auto;
+}
+
+.box > img {
+  object-fit: cover;
+  width: 500px;
+}
+.container {
+  margin: auto;
+  margin: 100px auto 0;
+  position: relative;
+  width: 500px;
+  height: 500px;
+}
+
+.side {
+  width: calc(500px / 2);
+  height: calc(500px / 10);
+  background: #000000a2;
+  border-radius: 8px;
+  position: absolute;
+  padding: 0.3rem;
+}
+
+.side2 {
+  right: 0;
+  bottom: 0;
+}
+
+.box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  background: #000000a2; */
+/* clip-path: polygon(
+    55% 15%,
+    0% 15%,
+    0% 100%,
+    45% 100%,
+    45% 85%,
+    100% 85%,
+    100% 0%,
+    55% 0%
+  ); */
+/* clip-path: path(
+    "M 10,70 L 260,70 A 10,10 0,0,0 270,60 L 270,10 A 10,10 0,0,1 280,0 L 490,0 A 10,10 0,0,1 500,10 L 500,420 A 10,10 0,0,1 490,430 L 240,430 A 10,10 0,0,0 230,440 L 230,490 A 10,10 0,0,1 220,500 L 10,500 A 10,10 0,0,1 0,490 L 0,80 A 10,10 0,0,1 10,70 Z"
+  );
+}
+
+.rotate {
+  rotate: 90deg;
+} */
+
+/* 3D shapes */
+
 :root {
   /* Dimensions */
+  /* cube */
   --cube-size: 150px;
+
+  /* sphere */
   --circle-size: 200px;
   --circle-inner-size: calc(var(--circle-size) / 2);
+
+  /* tyre */
+  --tyre-width: 100px;
+  --tyre-radius: 200px;
+  --tyre-border-radius: 30px;
+  --blur: 30px;
+  --tyre-rim-radius: 150px;
 
   /* Transforms */
   --perspective: 6000px;
@@ -14,7 +87,7 @@
   --animation-rotateX: -14deg;
 
   /* Colors */
-  --bg-color: hsl(224, 32%, 12%);
+  --bg-color: #151a28;
   --gradient-start: blue;
   --gradient-mid: purple;
   --box-shadow-color: #3cf;
@@ -95,6 +168,7 @@ body {
   transform: translateZ(var(--translateZ-full));
 }
 
+/* Sphere */
 .sphere {
   display: grid;
   place-items: center;
@@ -160,11 +234,99 @@ body {
 
 @keyframes autoRun {
   from {
-    transform: perspective(1000px) rotateX(var(--animation-rotateX))
+    transform: perspective(6000px) rotateX(var(--animation-rotateX))
       rotateY(0deg) rotateZ(0);
   }
   to {
-    transform: perspective(1000px) rotateX(var(--animation-rotateX))
+    transform: perspective(6000px) rotateX(var(--animation-rotateX))
       rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+/* Wheel */
+.wheel {
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(10deg) rotateY(10deg);
+  animation: rotateTyreY 10s linear infinite reverse;
+}
+
+.tyre {
+  width: var(--tyre-width);
+  height: var(--tyre-radius);
+  border-radius: var(--tyre-border-radius);
+  position: absolute;
+  background: transparent;
+  transform-style: preserve-3d;
+  box-shadow: var(--glow);
+}
+
+.tyre::after,
+.tyre::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  backdrop-filter: blur(var(--blur));
+
+  border-radius: inherit;
+  box-shadow: var(--glow);
+}
+
+.tyre1 {
+  width: var(--tyre-rim-radius);
+  height: var(--tyre-rim-radius);
+  border-radius: 100vh;
+  transform: rotateY(var(--rotateY));
+}
+
+.tyre1::after {
+  transform: translateZ(45px);
+}
+.tyre1::before {
+  transform: translateZ(-45px);
+}
+
+.tyre2 {
+  width: var(--tyre-radius);
+  border-radius: 100vh;
+  transform: rotateY(var(--rotateY));
+}
+.tyre2::after {
+  transform: translateZ(calc(var(--tyre-width) / 2 - 10px));
+}
+.tyre2::before {
+  transform: translateZ(calc((var(--tyre-width) / 2 - 10px) * -1));
+}
+
+.tyre3 {
+  animation: rotateTyreX 1s linear infinite reverse;
+}
+.tyre3::after {
+  transform: rotateX(60deg);
+}
+.tyre3::before {
+  transform: rotateX(-60deg);
+}
+
+@keyframes rotateTyreY {
+  from {
+    transform: perspective(var(--perspective));
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateY(360deg);
+  }
+}
+
+@keyframes rotateTyreX {
+  from {
+    transform: perspective(var(--perspective));
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(360deg);
   }
 }
