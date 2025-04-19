@@ -1,59 +1,170 @@
-* {
-  margin: 0;
-  padding: 0;
-}
-body {
-  overflow: auto;
+:root {
+  /* Dimensions */
+  --cube-size: 150px;
+  --circle-size: 200px;
+  --circle-inner-size: calc(var(--circle-size) / 2);
+
+  /* Transforms */
+  --perspective: 6000px;
+  --translateZ-half: calc(var(--cube-size) / 2);
+  --translateZ-full: var(--cube-size);
+  --circle-translateZ: calc(var(--circle-size) / 2 - 10px);
+  --rotateX: 90deg;
+  --rotateY: 90deg;
+  --animation-rotateX: -14deg;
+
+  /* Colors */
+  --bg-color: hsl(224, 32%, 12%);
+  --gradient-start: blue;
+  --gradient-mid: purple;
+  --box-shadow-color: #3cf;
+
+  /* Box shadow */
+  --glow: 0 0 2px 2px var(--box-shadow-color);
 }
 
-.box > img {
-  object-fit: cover;
-  width: 500px;
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: var(--bg-color);
+  background-image: conic-gradient(
+    from 0deg at 50% 50%,
+    var(--gradient-start),
+    var(--gradient-mid),
+    var(--gradient-mid),
+    var(--gradient-start)
+  );
+  background-blend-mode: multiply;
+  min-block-size: 100dvh;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  place-items: center;
+  user-select: none;
 }
-.container {
-  margin: auto;
-  margin: 100px auto 0;
+
+.cube {
   position: relative;
-  width: 500px;
-  height: 500px;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  animation: autoRun 10s linear infinite;
 }
 
 .side {
-  width: calc(500px / 2);
-  height: calc(500px / 10);
-  background: #000000a2;
-  border-radius: 8px;
+  width: var(--cube-size);
+  height: var(--cube-size);
   position: absolute;
-  padding: 0.3rem;
+  background: transparent;
+  transform-style: preserve-3d;
+  box-shadow: var(--glow);
+}
+
+.side::after,
+.side::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  box-shadow: var(--glow);
+}
+
+.side1 {
+  transform: perspective(var(--perspective)) translateZ(var(--translateZ-half));
+}
+
+.side1::after {
+  transform: translateZ(calc(-1 * var(--translateZ-full)));
 }
 
 .side2 {
-  right: 0;
-  bottom: 0;
+  transform: perspective(var(--perspective)) rotateY(var(--rotateY))
+    translateZ(var(--translateZ-half));
 }
 
-.box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 500px;
-  height: 500px;
-  background: #000000a2;
-  /* clip-path: polygon(
-    55% 15%,
-    0% 15%,
-    0% 100%,
-    45% 100%,
-    45% 85%,
-    100% 85%,
-    100% 0%,
-    55% 0%
-  ); */
-  clip-path: path(
-    "M 10,70 L 260,70 A 10,10 0,0,0 270,60 L 270,10 A 10,10 0,0,1 280,0 L 490,0 A 10,10 0,0,1 500,10 L 500,420 A 10,10 0,0,1 490,430 L 240,430 A 10,10 0,0,0 230,440 L 230,490 A 10,10 0,0,1 220,500 L 10,500 A 10,10 0,0,1 0,490 L 0,80 A 10,10 0,0,1 10,70 Z"
-  );
+.side2::after {
+  transform: translateZ(calc(-1 * var(--translateZ-full)));
 }
 
-.rotate {
-  rotate: 90deg;
+.side3 {
+  transform: perspective(var(--perspective)) rotateX(var(--rotateX))
+    translateZ(calc(-1 * var(--translateZ-half)));
+}
+
+.side3::after {
+  transform: translateZ(var(--translateZ-full));
+}
+
+.sphere {
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  animation: autoRun 10s linear infinite reverse;
+}
+
+.circle {
+  width: var(--circle-size);
+  height: var(--circle-size);
+  border-radius: 100vh;
+  position: absolute;
+  background: transparent;
+  transform-style: preserve-3d;
+  box-shadow: var(--glow);
+}
+
+.circle::after,
+.circle::before {
+  content: "";
+  width: var(--circle-inner-size);
+  height: var(--circle-inner-size);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border-radius: 100vh;
+  box-shadow: var(--glow);
+}
+
+.circle1::after {
+  transform: translateX(50%) translateY(50%)
+    translateZ(var(--circle-translateZ));
+}
+.circle1::before {
+  transform: translateX(50%) translateY(50%)
+    translateZ(calc(-1 * var(--circle-translateZ)));
+}
+
+.circle2 {
+  transform: rotateY(var(--rotateY));
+}
+.circle2::after {
+  transform: translateX(50%) translateY(50%)
+    translateZ(var(--circle-translateZ));
+}
+.circle2::before {
+  transform: translateX(50%) translateY(50%)
+    translateZ(calc(-1 * var(--circle-translateZ)));
+}
+
+.circle3 {
+  transform: rotateX(var(--rotateX));
+}
+.circle3::after {
+  transform: translateX(50%) translateY(50%)
+    translateZ(var(--circle-translateZ));
+}
+.circle3::before {
+  transform: translateX(50%) translateY(50%)
+    translateZ(calc(-1 * var(--circle-translateZ)));
+}
+
+@keyframes autoRun {
+  from {
+    transform: perspective(1000px) rotateX(var(--animation-rotateX))
+      rotateY(0deg) rotateZ(0);
+  }
+  to {
+    transform: perspective(1000px) rotateX(var(--animation-rotateX))
+      rotateY(360deg) rotateZ(360deg);
+  }
 }
