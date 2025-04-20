@@ -112,6 +112,7 @@ body {
   min-block-size: 100dvh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   place-items: center;
   user-select: none;
 }
@@ -329,4 +330,231 @@ body {
   to {
     transform: perspective(var(--perspective)) rotateX(360deg);
   }
+}
+:root {
+  /* Bike Sizes */
+  --bike-width: 100px;
+  --bike-height: 50px;
+  --bike-depth: 80px;
+  --bike-part-offsetY: 25px;
+
+  /* Back Part */
+  --back-after-height: 80px;
+  --back-before-height: 10px;
+  --back-before-width: 150px;
+  --back-before-offsetX: -25px;
+  --back-before-offsetY: 180px;
+  --back-before-offsetZ: -180px;
+
+  /* Front Part */
+  --front-after-height: 80px;
+  --front-before-height: 60px;
+  --front-before-offsetY: 85px;
+  --front-before-offsetZ: -87px;
+
+  /* Top Part */
+  --top-width: 100px;
+  --top-height: 250px;
+  --top-offsetZ: 150px;
+  --top-offsetY: -23px;
+  --top-after-height: 120px;
+  --top-after-offsetZ: 43px;
+  --top-after-offsetY: -105px;
+  --top-before-height: 20px;
+  --top-before-offsetZ: 115px;
+  --top-before-offsetY: -70px;
+
+  /* Bottom Part */
+  --bottom-width: 100px;
+  --bottom-height: 400px;
+
+  /* Bike Colors */
+  --bike-tyre-bg: #0b1432;
+
+  /* Bike Animation */
+  --bike-rotate-duration: 10s;
+}
+
+.bike {
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+  animation: rotateBike var(--bike-rotate-duration) linear infinite reverse;
+}
+
+.container:hover {
+  animation-play-state: paused;
+}
+
+.part {
+  position: absolute;
+  background: var(--bg-color);
+  transform-style: preserve-3d;
+  box-shadow: var(--glow);
+}
+
+.part::after,
+.part::before {
+  content: "";
+  position: absolute;
+  background: var(--bg-color);
+  box-shadow: var(--glow);
+}
+
+.back {
+  width: var(--bike-width);
+  height: var(--bike-height);
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(90deg)
+    translateZ(calc(-1 * var(--bike-depth)))
+    translateY(var(--bike-part-offsetY));
+}
+
+.back::after {
+  width: var(--bike-width);
+  height: var(--back-after-height);
+  transform: perspective(var(--perspective)) rotateX(-50deg) translateZ(10px)
+    translateY(48px);
+}
+
+.back::before {
+  width: var(--back-before-width);
+  height: var(--back-before-height);
+  background: linear-gradient(
+    to left,
+    transparent 0%,
+    transparent 30%,
+    var(--box-shadow-color) 30%,
+    var(--box-shadow-color) 31%,
+    var(--bg-color) 31%,
+    var(--bg-color) 70%,
+    var(--box-shadow-color) 70%,
+    var(--box-shadow-color) 71%,
+    transparent 71%
+  );
+  transform: perspective(var(--perspective)) rotateX(80deg)
+    translateX(var(--back-before-offsetX))
+    translateY(var(--back-before-offsetY))
+    translateZ(var(--back-before-offsetZ));
+}
+
+.front {
+  width: var(--bike-width);
+  height: var(--bike-height);
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(90deg)
+    translateZ(var(--bike-depth)) translateY(var(--bike-part-offsetY));
+}
+
+.front::after {
+  width: var(--bike-width);
+  height: var(--front-after-height);
+  transform: perspective(var(--perspective)) rotateX(40deg) translateZ(-8px)
+    translateY(50px);
+}
+
+.front::before {
+  width: var(--bike-width);
+  height: var(--front-before-height);
+  transform: rotateX(90deg) translateY(var(--front-before-offsetY))
+    translateZ(var(--front-before-offsetZ));
+}
+
+.bottom {
+  width: var(--bottom-width);
+  height: var(--bottom-height);
+  position: relative;
+  transform-style: preserve-3d;
+  background: linear-gradient(
+    to top,
+    transparent 0%,
+    transparent 30%,
+    var(--box-shadow-color) 30%,
+    var(--box-shadow-color) 31%,
+    var(--bg-color) 31%,
+    var(--bg-color) 70%,
+    var(--box-shadow-color) 70%,
+    var(--box-shadow-color) 71%,
+    transparent 71%
+  );
+  box-shadow: none;
+}
+
+.bottom::after,
+.bottom::before {
+  width: 200px;
+  height: var(--bottom-height);
+  clip-path: polygon(
+    28% -1%,
+    40% -1%,
+    40% 15%,
+    75% 30%,
+    101% 30%,
+    101% 70%,
+    70% 71%,
+    45% 85%,
+    0% 27%
+  );
+}
+
+.bottom::after {
+  transform: translateZ(100px) rotateY(90deg);
+}
+.bottom::before {
+  transform: translateZ(100px) translateX(-100px) rotateY(90deg);
+}
+
+.top {
+  width: var(--top-width);
+  height: var(--top-height);
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective)) rotateX(-20deg)
+    translateZ(var(--top-offsetZ)) translateY(var(--top-offsetY));
+}
+
+.top::after {
+  width: var(--top-width);
+  height: var(--top-after-height);
+  inset: 0;
+  transform: perspective(var(--perspective)) rotateX(45deg)
+    translateZ(var(--top-after-offsetZ)) translateY(var(--top-after-offsetY));
+}
+
+.top::before {
+  width: var(--top-width);
+  height: var(--top-before-height);
+  background: var(--bg-color);
+  transform: perspective(var(--perspective)) rotateX(105deg)
+    translateZ(var(--top-before-offsetZ)) translateY(var(--top-before-offsetY));
+}
+
+.bikeWheel {
+  animation: none;
+  transform: rotateX(10deg) rotateY(180deg);
+}
+
+.bikeWheel .tyre,
+.bikeWheel .tyre::before,
+.bikeWheel .tyre::after {
+  background: var(--bike-tyre-bg);
+}
+
+@keyframes rotateBike {
+  from {
+    transform: perspective(var(--perspective)) rotateX(80deg) rotateZ(90deg);
+  }
+  to {
+    transform: perspective(var(--perspective)) rotateX(80deg) rotateZ(90deg)
+      rotateZ(360deg);
+  }
+}
+
+@media screen and (width <= 800px) {
+  body {
+    background: #000;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    height: 250vh;
+  }
+
 }
