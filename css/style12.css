@@ -1,0 +1,99 @@
+/* Grid */
+.grid {
+  display: grid;
+  grid-template-rows: repeat(5, 100px);
+  grid-template-columns: repeat(5, 100px);
+  grid-template-areas:
+    " item1   .      .    .   . "
+    " item1    item2 item2   .      . "
+    " item1   item3 item3    item3   . "
+    " .       item3    item3     item3       . "
+    " .       .      .       .       . ";
+}
+
+.item1 {
+  grid-area: item1;
+  background: #fc3;
+}
+.item2 {
+  grid-area: item2;
+  background: #cf3;
+}
+.item3 {
+  grid-area: item3;
+  background: #3cf;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 250px);
+  justify-content: center;
+  gap: 20px;
+}
+
+/* grid */
+.header {
+  grid-area: header;
+  background-color: aqua;
+}
+.feature1 {
+  grid-area: feature1;
+  background-color: blue;
+}
+.feature2 {
+  grid-area: feature2;
+  background-color: yellow;
+}
+.feature3 {
+  grid-area: feature3;
+  background-color: lime;
+}
+.feature4 {
+  grid-area: feature4;
+  background-color: red;
+}
+.feature5 {
+  grid-area: feature5;
+  background-color: orange;
+}
+
+main {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 200px 250px 150px auto;
+  grid-template-areas:
+    "   header   header    header  "
+    "   feature1 feature2  feature3  "
+    "   feature4 feature4  feature4  "
+    "   feature5 feature5 feature5  ";
+}
+
+@media screen and (max-width: 1023px) {
+  main {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 100px auto 100px 150px;
+    grid-template-areas:
+      "   header   header  "
+      "   feature5 feature5  "
+      "   feature4 feature1 "
+      "   feature2 feature3 ";
+  }
+}
+@media screen and (max-width: 767px) {
+  main {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: 100px 100px 100px 150px 100px 150px;
+    grid-template-areas:
+      "   header     "
+      "   feature5   "
+      "   feature4  "
+      "   feature3  "
+      "   feature2  "
+      "   feature1  ";
+  }
+}
+
+.shadow img {
+  filter: drop-shadow(100px 20px #333);
+}

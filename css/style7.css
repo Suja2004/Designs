@@ -1,16 +1,25 @@
-/* :root {
+:root {
   color-scheme: light dark;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100vh;
+}
 .grid {
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   background: light-dark(#aaa, #000);
   gap: 10px;
 }
 div {
-  height: 250px;
   background: light-dark(#eee, #333);
-
   color: light-dark(#000, #fff);
   font-size: 2rem;
   display: flex;
@@ -27,7 +36,7 @@ div {
     hsla(66, 76%, 55%, 0.5),
     transparent 200px
   );
-} */
+}
 
 /* remove image bg */
 /* 
@@ -64,132 +73,3 @@ body {
 /* mix-blend-mode:overlay; */
 /* mix-blend-mode:normal; */
 /* } */
-
-/* Slider */
-/* body {
-  background: #333;
-}
-.banner {
-  width: 100%;
-  display: flex;
-  position: relative;
-  top: 150px;
-}
-
-.list {
-  margin: auto;
-  width: 250px;
-  height: 300px;
-  padding: 1rem;
-}
-
-.arrows {
-  width: 300px;
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.arrows button {
-  width: 50px;
-  height: 50px;
-  border: none;
-  border-radius: 50%;
-  padding: 0.4rem 0.6rem;
-}
-
-.list img:not(img:first-child) {
-  display: none;
-} */
-
-/* 3D tilting Card */
-:root {
-  --pink: hsl(338, 70%, 55%);
-  --teal: hsl(183, 70%, 62%);
-  --white: hsl(334, 7%, 95%);
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: hsl(224, 32%, 12%);
-  background-image: conic-gradient(
-    from 0deg at 50% 50%,
-    blue,
-    purple,
-    purple,
-    blue
-  );
-  background-blend-mode: multiply;
-  color: white;
-  min-block-size: 100dvh;
-  display: grid;
-  place-items: center;
-  user-select: none;
-}
-
-pre {
-  --selecter: var(--pink);
-  --property: var(--teal);
-  --punctuation: var(--white);
-
-  font-size: 3rem;
-  font-weight: bold;
-  background: hsl(222, 45%, 7%);
-  padding: 2rem;
-  border-radius: 1rem;
-  position: relative;
-
-  transform-style: preserve-3d;
-  transform: perspective(5000px) rotateY(var(--rotateY)) rotateX(var(--rotateX));
-  transition: all .4s linear;
-}
-
-.selector {
-  color: var(--selecter);
-}
-
-.property {
-  color: var(--property);
-}
-
-.punctuation {
-  color: var(--punctuation);
-}
-
-.property + .punctuation {
-  color: var(--property);
-}
-
-pre > * {
-  text-shadow: 0 0 0.3em currentColor;
-}
-
-pre::after,
-pre::before {
-  content: "";
-  position: absolute;
-  border-radius: inherit;
-}
-
-pre::after {
-  inset: -1rem;
-  background: linear-gradient(-45deg, red, blue);
-  transform: translateZ(-50px);
-}
-
-pre::before {
-  inset: 0.5rem;
-  background: #000;
-  transform: translateZ(-49px);
-  filter: blur(15px);
-  opacity: 0.75;
-}

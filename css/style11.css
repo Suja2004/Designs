@@ -1,0 +1,25 @@
+/* Ink */
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+}
+
+.banner {
+  height: 100vh;
+  position: relative;
+}
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images2/img2.jpg");
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+
+  mask-image: url("/images2/ink.gif");
+  mask-repeat: no-repeat;
+  mask-size: cover;
+  mask-position: center;
+}

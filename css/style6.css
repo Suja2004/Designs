@@ -1,140 +1,22 @@
-/* SVG */
-/* body {
+body {
   margin: 0;
-  font-size: 5em;
-}
-.banner {
+  padding: 0;
+  width: 100%;
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: stretch;
 }
-
-.banner::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/images2/img6.png");
-  background-size: cover;
-  background-position: center;
-  animation: bgZoomIn 4s ease-in-out 1 forwards;
-  z-index: -1;
-  pointer-events: none;
-}
-
-.banner::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image: url("/images2/img5.png");
-  background-size: cover;
-  background-position: top;
-  transform: scale(2);
-  animation: bgZoomOut 4s ease-in-out 1 forwards;
-  z-index: -1;
-  pointer-events: none;
-}
-
-@keyframes bgZoomIn {
-  from {
-    transform: scale(1.2);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-@keyframes bgZoomOut {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(2);
-  }
-}
-
-svg path {
-  fill: transparent;
-  stroke: #fff;
-  stroke-width: 0.7;
-  stroke-dasharray: 50;
-  stroke-dashoffset: 50;
-  animation: textAnimation 4s ease-in-out 1 forwards;
-}
-@keyframes textAnimation {
-  0% {
-    stroke-dashoffset: 50;
-  }
-  80% {
-    fill: transparent;
-  }
-  100% {
-    fill: #fff;
-    stroke-dashoffset: 0;
-  }
-} */
-
-/* Text Effect */
-/* @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
-body {
-  font-family: Poppins;
-  font-size: 50px;
-  font-weight: 900;
-}
-
-.effect,
-.text {
-  position: absolute;
-  top: 20%;
-  left: 30%;
-  padding-top: 10px;
-}
-
-.effect {
-  width: 65px;
-  height: 65px;
-  background-color: #000;
-  border-radius: 50%;
-  padding: 10px;
-  overflow: hidden;
-  animation: ef 3s ease-in-out infinite alternate;
-}
-
-.content {
-  color: #fff;
-  position: absolute;
-  left: 0;
-  width: max-content;
-  animation: ct 3s ease-in-out infinite alternate;
-}
-
-@keyframes ef {
-  from {
-    transform: translate(-20px, 0);
-  }
-  to {
-    transform: translate(95px, 0);
-  }
-}
-
-@keyframes ct {
-  from {
-    transform: translate(20px, 0);
-  }
-  to {
-    transform: translate(-95px, 0);
-  }
-} */
 
 /*Slider */
-/* .slider {
-  width: 100%;
+.slider {
+  width: 95%;
   border: 1px solid red;
   height: var(--height);
   overflow: hidden;
   mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
+  margin-bottom: 1rem;
 }
 
 .slider .list {
@@ -150,7 +32,9 @@ body {
   position: absolute;
   left: 100%;
   animation: autoRun 10s linear infinite;
-  animation-delay: calc((10s / var(--quantity)) * (var(--position) - 1))!important;
+  animation-delay: calc(
+    (10s / var(--quantity)) * (var(--position) - 1)
+  ) !important;
   transition: filter 0.5s;
 }
 
@@ -168,6 +52,10 @@ body {
   }
 }
 
+.slider[reverse="true"] .item {
+  animation: reversePlay 10s linear infinite;
+}
+
 .slider:hover .item {
   animation-play-state: paused;
   filter: grayscale(1);
@@ -177,10 +65,6 @@ body {
   filter: grayscale(0);
 }
 
-.slider[reverse="true"] .item {
-  animation: reversePlay 10s linear infinite;
-}
-
 @keyframes reversePlay {
   from {
     left: calc(var(--width) * -1);
@@ -188,7 +72,7 @@ body {
   to {
     left: 100%;
   }
-} */
+}
 
 /* Slider2 */
 body {
@@ -197,25 +81,34 @@ body {
   box-sizing: border-box;
   mask-image: linear-gradient(to right, transparent, #000 10% 90%, transparent);
 }
-.slider {
+.slider2 {
   width: 100%;
   height: 350px;
   overflow: hidden;
 }
 
-.slider .list {
+.slider2 .list {
   width: 100%;
   min-width: calc(250px * var(--quantity));
   display: flex;
   position: relative;
 }
 
-.slider .list .item {
+.slider2 .list .item {
   width: 250px;
+  height: 200px;
   position: absolute;
   left: 100%;
   animation: autoRun 10s linear infinite;
-  animation-delay: calc(var(--time) / var(--quantity) * (var(--position) - 1) - 9s);
+  animation-delay: calc(
+    var(--time) / var(--quantity) * (var(--position) - 1) - 9s
+  );
+}
+
+.slider2 .list .item img {
+  width: 250px;
+  height: 200px;
+  object-fit: cover;
 }
 
 @keyframes autoRun {
