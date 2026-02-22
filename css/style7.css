@@ -18,7 +18,7 @@ body {
   background: light-dark(#aaa, #000);
   gap: 10px;
 }
-div {
+.grid div {
   background: light-dark(#eee, #333);
   color: light-dark(#000, #fff);
   font-size: 2rem;

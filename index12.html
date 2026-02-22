@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -6,26 +6,36 @@
     <link rel="stylesheet" href="css/style12.css" />
 
     <title>Grid Layout</title>
+    <link rel="stylesheet" href="css/navbar.css" />
   </head>
   <body>
+    <div id="navbar-container"></div>
+
+    <script>
+      fetch("navbar.html")
+        .then((res) => res.text())
+        .then((data) => {
+          document.getElementById("navbar-container").innerHTML = data;
+
+          let menu = document.getElementById("menu");
+          let navList = document.getElementById("list");
+
+          menu.onclick = () => {
+            navList.style.display =
+              navList.style.display === "block" ? "none" : "block";
+          };
+        });
+    </script>
     <!-- Grid -->
     <div class="grid">
-      <div class="item1">
-      </div>
-      <div class="item2">
-      </div>
-      <div class="item3">
-      </div>
-      <div class="item4">
-      </div>
-      <div class="item5">
-      </div>
-      <div class="item6">
-      </div>
-      <div class="item7">
-      </div>
-      <div class="item8">
-      </div>
+      <div class="item1"></div>
+      <div class="item2"></div>
+      <div class="item3"></div>
+      <div class="item4"></div>
+      <div class="item5"></div>
+      <div class="item6"></div>
+      <div class="item7"></div>
+      <div class="item8"></div>
     </div>
 
     <main>

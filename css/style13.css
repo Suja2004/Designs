@@ -3,85 +3,77 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Poppins;
-  font-size: 50px;
-  font-weight: 900;
 }
 
 /* SVG */
-body {
-    margin: 0;
-    font-size: 5em;
+.banner {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images2/img6.png");
+  background-size: cover;
+  background-position: center;
+  animation: bgZoomIn 4s ease-in-out 1 forwards;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("/images2/img5.png");
+  background-size: cover;
+  background-position: top;
+  transform: scale(2);
+  animation: bgZoomOut 4s ease-in-out 1 forwards;
+  z-index: -1;
+  pointer-events: none;
+}
+
+@keyframes bgZoomIn {
+  from {
+    transform: scale(1.2);
   }
-  .banner {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
+  to {
+    transform: scale(1);
   }
-  
-  .banner::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("/images2/img6.png");
-    background-size: cover;
-    background-position: center;
-    animation: bgZoomIn 4s ease-in-out 1 forwards;
-    z-index: -1;
-    pointer-events: none;
+}
+@keyframes bgZoomOut {
+  from {
+    transform: scale(1);
   }
-  
-  .banner::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("/images2/img5.png");
-    background-size: cover;
-    background-position: top;
+  to {
     transform: scale(2);
-    animation: bgZoomOut 4s ease-in-out 1 forwards;
-    z-index: -1;
-    pointer-events: none;
   }
-  
-  @keyframes bgZoomIn {
-    from {
-      transform: scale(1.2);
-    }
-    to {
-      transform: scale(1);
-    }
-  }
-  @keyframes bgZoomOut {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(2);
-    }
-  }
-  
-  svg path {
-    fill: transparent;
-    stroke: #fff;
-    stroke-width: 0.7;
-    stroke-dasharray: 50;
+}
+
+svg path {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 0.7;
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  animation: textAnimation 4s ease-in-out 1 forwards;
+}
+@keyframes textAnimation {
+  0% {
     stroke-dashoffset: 50;
-    animation: textAnimation 4s ease-in-out 1 forwards;
   }
-  @keyframes textAnimation {
-    0% {
-      stroke-dashoffset: 50;
-    }
-    80% {
-      fill: transparent;
-    }
-    100% {
-      fill: #fff;
-      stroke-dashoffset: 0;
-    }
+  80% {
+    fill: transparent;
   }
-  
+  100% {
+    fill: #fff;
+    stroke-dashoffset: 0;
+  }
+}
